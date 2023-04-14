@@ -25,12 +25,35 @@ module.exports = (sequelize, DataTypes) => {
   }
   Users.init(
     {
-      nombre: DataTypes.STRING,
-      apellidos: DataTypes.STRING,
-      email: DataTypes.STRING,
-      id_roles: DataTypes.INTEGER,
-      phone: DataTypes.INTEGER,
-      password: DataTypes.STRING,
+      nombre: {
+        type: DataTypes.STRING,
+        validate: {
+          isAlpha: true,
+          min: 3,
+        },
+      },
+      apellidos: {
+        type: DataTypes.STRING,
+        validate: {
+          isAlpha: true,
+          min: 3,
+        },
+      },
+      email: {
+        type: DataTypes.STRING,
+        validate: {
+          isAlphanumeric: true,
+          isEmail: true,
+        },
+      },
+      id_roles: { type: DataTypes.INTEGER },
+      phone: {
+        type: DataTypes.INTEGER,
+        validate: {
+          isNumeric: true,
+        },
+      },
+      password: { type: DataTypes.STRING, validate: { isAlphanumeric: true } },
     },
     {
       sequelize,

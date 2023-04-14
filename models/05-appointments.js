@@ -22,8 +22,16 @@ module.exports = (sequelize, DataTypes) => {
   Appointments.init({
     id_patients: DataTypes.INTEGER,
     id_doctors: DataTypes.INTEGER,
-    time: DataTypes.TIME,
-    date: DataTypes.DATE
+    time:{
+      type: DataTypes.TIME,
+    }, 
+    date:{
+        type: DataTypes.DATE,
+        validate: {
+          isDate: true,
+        },
+      }
+     
   }, {
     sequelize,
     modelName: 'Appointments',
