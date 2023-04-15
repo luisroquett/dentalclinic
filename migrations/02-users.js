@@ -19,7 +19,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       id_roles: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "roles",
+          key: "id"
+
+        }
+        
       },
       phone: {
         type: Sequelize.INTEGER

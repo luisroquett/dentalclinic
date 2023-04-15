@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     id_users: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Doctors',
+    modelName: 'Doctor',
+    tableName: 'doctors'
   });
   return Doctors;
 };

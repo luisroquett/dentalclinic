@@ -9,11 +9,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_patients: {
-        type: Sequelize.INTEGER
-      },
-      id_doctors: {
-        type: Sequelize.INTEGER
+        id_patients: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: "doctors",
+            key: "id",
+          },
+        },
+        id_doctors: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: "patients",
+            key: "id",
+          },
       },
       time: {
         type: Sequelize.TIME
