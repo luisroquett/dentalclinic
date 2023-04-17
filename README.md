@@ -77,41 +77,7 @@ Technoclogy used:
 6. ``` $ npm run dev ``` 
 7. ...
 
-## Endpoints
-<details>
-<summary>Endpoints</summary>
 
-- AUTH
-    - REGISTER
-
-            POST http://localhost:3000/auth/register
-        body:
-        ``` js
-            {
-                "user": "David",
-                "email": "david@david.com",
-                "password": "princes"
-            }
-        ```
-
-    - LOGIN
-
-            POST http://localhost:3000/auth/login  
-        body:
-        ``` js
-            {
-                "user": "David",
-                "email": "david@david.com",
-                "password": "princes"
-            }
-        ```
-- RUTINAS
-    - RECUPERAR RUTINAS  
-
-            GET http://localhost:3000/api/rutina
-
-    - ...
-</details>
 
 ## License
 This project is under licence from "Antonio Toscano".
