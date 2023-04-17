@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 
 authController.register = async (req, res) => {
     try {
-        const { nombre, apellido, phone, email, password } = req.body;
+        const { nombre, apellido, telefono, email, password } = req.body;
         const encryptedPassword = bcrypt.hashSync(password, 10);
-        if (name === undefined || email === undefined|| password === undefined) {
+        if (nombre === undefined || email === undefined|| password === undefined) {
             return res.json({
                 success: false,
                 message: "You must fill all the fields"
@@ -17,7 +17,7 @@ authController.register = async (req, res) => {
             {
                 nombre: nombre,
                 apellido: apellido,
-                phone: phone,
+                telefono: telefono,
                 email: email,
                 password: encryptedPassword,
                 role_id: 2
@@ -69,7 +69,7 @@ authController.login = async (req, res) => {
                 userId: user.id,
                 name: user.name,
                 surname: user.surname,
-                phone: user.phone,
+                telefono: user.telefono,
                 email: user.email,
                 roleId: user.role_id
             },
@@ -87,7 +87,7 @@ authController.login = async (req, res) => {
         return res.status(500).json(
             {
                 success: false,
-                message: "something went wrong",
+                message: "Error",
                 error: error.message
             }
         );
