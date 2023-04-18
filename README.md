@@ -86,13 +86,6 @@ To achieve my goal I have collected information from:
 link to repositories
 link to documentation of external libraries
 
-## Development:
-
-``` js
- const developer = "datata";
-
- console.log("Desarrollado por: " + datata);
-```  
 
 
 
