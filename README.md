@@ -44,8 +44,7 @@ Appointment creation.
 Modification of appointments.
 Cancellation of appointments.
 
-## Diagrama BD
-!['imagen-db'](./img/db.png)
+
 
 ## Stack
 Technoclogy used:
@@ -65,8 +64,7 @@ Technoclogy used:
  </div>
 
 
-## Diagrama DB
-!['imagen-db'](./_images/db.png)
+
 
 ## Instalation on local
 1. Start the repository
