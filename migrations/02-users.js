@@ -16,18 +16,17 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
       },
       id_roles: {
         type: Sequelize.INTEGER,
         references: {
           model: "roles",
           key: "id"
-
-        }
-        
+        }       
       },
-      phone: {
+      telefono: {
         type: Sequelize.INTEGER
       },
       password: {

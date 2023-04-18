@@ -10,16 +10,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.belongsTo(models.Role, {
-        foreignKey: "id_role",
+        foreignKey: "id_roles",
       });
 
       User.hasOne(models.Doctor, {
-        foreignKey: "id_user",
+        foreignKey: "id_users",
       });
 
       User.hasOne(models.Patient, {
-        
-        foreignKey: "id_user",
+        foreignKey: "id_users",
       });
     }
   }
@@ -47,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       id_roles: { type: DataTypes.INTEGER },
-      phone: {
+      telefono: {
         type: DataTypes.INTEGER,
         validate: {
           isNumeric: true,
@@ -58,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
-      tableName: "users"
+      tableName: "users",
     }
   );
   return User;

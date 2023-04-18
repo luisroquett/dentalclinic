@@ -7,9 +7,9 @@ module.exports = {
         "appointments",
         [
            {
-              id_patient: 1,
-              id_doctor: 2,
-              date: 2023/06/06,
+              id_patients: 1,
+              id_doctors: 1,
+              date: "2023-06-06",
               time:16.40,
               createdAt: new Date(),
               updatedAt: new Date(),

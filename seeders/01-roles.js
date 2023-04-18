@@ -7,14 +7,17 @@ module.exports = {
          "roles",
          [
             {
-               role_name: "doctor",
-               id_roles: 1,
+               role_name: "patient",
                createdAt: new Date(),
                updatedAt: new Date(),
             },
             {
-              role_name: "patient",
-              id_roles: 2,
+              role_name: "doctor",
+              createdAt: new Date(),
+              updatedAt: new Date(),
+           },
+            {
+              role_name: "admin",
               createdAt: new Date(),
               updatedAt: new Date(),
            },

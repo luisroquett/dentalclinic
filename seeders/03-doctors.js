@@ -7,7 +7,7 @@ module.exports = {
         "doctors",
         [
            {
-              id_users: 2,
+              id_users: 3,
               createdAt: new Date(),
               updatedAt: new Date(),
            },
