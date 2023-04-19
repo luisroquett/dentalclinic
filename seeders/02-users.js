@@ -20,7 +20,7 @@ module.exports = {
         email: "danim@email.com",
         id_roles: 1,
         telefono: 32323232,
-        password: 1234,
+        password: "geekshub",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
