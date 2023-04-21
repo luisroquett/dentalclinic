@@ -9,16 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.belongsTo(models.Role, {
+      User.belongsTo(models.Role, { //this ForeignKey belongs to User
         foreignKey: "id_roles",
       });
 
       User.hasOne(models.Doctor, {
-        foreignKey: "id_users",
+        foreignKey: "id_users",   // this ForeignKey belongs to Doctor
       });
 
       User.hasOne(models.Patient, {
-        foreignKey: "id_users",
+        foreignKey: "id_users",  // this ForeignKey belongs to Patient
       });
     }
   }
@@ -40,9 +40,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
+        allowNull: false,
+        unique:true,
         validate: {
-          isAlphanumeric: true,
           isEmail: true,
+          isLowercase: true,
         },
       },
       id_roles: { type: DataTypes.INTEGER },
@@ -52,7 +54,14 @@ module.exports = (sequelize, DataTypes) => {
           isNumeric: true,
         },
       },
-      password: { type: DataTypes.STRING, validate: { isAlphanumeric: true } },
+
+      
+      
+      password: { type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          min: 8
+        }, },
     },
     {
       sequelize,

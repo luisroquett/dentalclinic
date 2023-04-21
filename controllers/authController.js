@@ -1,9 +1,8 @@
 const authController = {};
 const { User, Patient } = require("../models");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { generateToken } = require("../_util/token");
-const { hash, compareHash } = require("../_util/hash");
-const{sendSuccsessResponse,sendErrorResponse} = require("../_util/sendResponse")
 
 authController.register = async (req, res) => {
   try {
@@ -21,7 +20,7 @@ authController.register = async (req, res) => {
       email: email,
       telefono: telefono,
       password: encryptedPassword,
-      role_id: 1,
+      role_id: 2,
     });
     const newPatient = await Patient.create({
       user_id: newUser.id,
@@ -41,30 +40,72 @@ authController.register = async (req, res) => {
   }
 };
 
-authController.login = async (req, res) => {
-  const { email, password } = req.body;
+// register doctor
 
-  if (!email || !password) {
-    return sendErrorResponse(res, 400, "email and password requiered");
-  }
+// authController.registerDoctor = async (req, res) => {
+//   const { nombre, email, password, apellidos } = req.body;
+
+//   if (password.length < 8) {
+//     return sendErrorResponse(
+//       res,
+//       400,
+//       "Password must be larger than 8 characters"
+//     );
+//   }
+
+//   const encryptedPassword = hash(password);
+
+//   const newUser = {
+//     nombre,
+//     apellidos,
+//     email,
+//     password: encryptedPassword,
+//     id_rol: 2,
+//   };
+
+//   try {
+//     let newDoctor = await Users.create(newUser);
+//      await Doctors.create({ id_usuario: newDoctor.id });
+//     sendSuccsessResponse(res, 201, "Doctor registered succsessfully");
+//   } catch (error) {
+//     sendErrorResponse(res, 500, "Error creating doctor", error);
+//   }
+// };
+
+
+//login de user
+authController.login = async (req, res) => {
   try {
+    const { email, password } = req.body;
+
     const user = await User.findOne({ where: { email: email } });
     if (!user) {
+      return res.send("Wrong email");
+    }
+
+    console.log(user);
+    const isMatch = bcrypt.compareSync(password, user.password);
+    if (!isMatch) {
       return res.send("Wrong Credentials");
     }
 
-    const isValidPasswrod = compareHash(password, user.password)
-
-    if(!isValidPasswrod){
-        return sendErrorResponse(res, 401, "Wrong credentials")
-    }
-
     //Token propio para autenticar el usuario
-    const token = generateToken({
-      id_user: user.id,
-      id_roles: user.id_roles,
+    const token = jwt.sign(
+      {
+        userId: user.id,
+        nombre: user.nombre,
+        apellidos: user.apellidos,
+        telefono: user.telefono,
+        email: user.email,
+        roleId: user.role_id,
+      },
+      "secret"
+    );
+    return res.json({
+      success: true,
+      message: "Token created",
+      data: token,
     });
-    return sendSuccsessResponse(res, 200, token);
   } catch (error) {
     return res.status(500).json({
       success: false,

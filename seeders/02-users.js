@@ -1,4 +1,10 @@
 "use strict";
+
+const { hash } = require("../_util/hash");
+
+const password = "12345678";
+const encryptedPassword = hash(password, 10);
+
 const { Op } = require("sequelize");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -7,10 +13,10 @@ module.exports = {
       {
         nombre: "Luis",
         apellidos: "Garganta",
-        email: "lusi@email.com",
+        email: "luisgar@email.com",
         id_roles: 1,
         telefono: 23232323,
-        password: 1234,
+        password: encryptedPassword,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -20,17 +26,17 @@ module.exports = {
         email: "danim@email.com",
         id_roles: 1,
         telefono: 32323232,
-        password: "geekshub",
+        password: encryptedPassword,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         nombre: "Ana",
         apellidos: "Lengua",
-        email: "lengua@email.com",
+        email: "alengua@email.com",
         id_roles: 2,
         telefono: 45454545,
-        password: 1234,
+        password: encryptedPassword,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -39,8 +45,8 @@ module.exports = {
         apellidos: "Mandibula",
         email: "mandia@email.com",
         id_roles: 3,
-        telefono: 6767676,
-        password: 1234,
+        telefono: 67676767,
+        password: encryptedPassword,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
