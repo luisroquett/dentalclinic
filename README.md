@@ -1,4 +1,4 @@
-# Dental Clinic 
+# Dental Clinic project
 
 <details>
   <summary>Content 📝</summary>
@@ -28,7 +28,7 @@ appointments, create, modify and cancel them.
 There will also be a user area with your personal data, which only you will be able to see.
 only he will be able to see himself.
 In addition, dentists must be able to register as professionals,
-login and logout and see all appointments and registered clients.
+login and logout and see all appointments and registered patients.
 
 
 
@@ -44,8 +44,17 @@ Appointment creation.
 Modification of appointments.
 Cancellation of appointments.
 
+## Diagrama BD
+!['imagen-db'](./_img/db.png)
 
+Postman
+!['imagen-db'](./_img/postman.jpg)
 
+Creation of User
+!['imagen-db'](./_img/user_register.JPG)
+
+Creation of Appointment
+!['imagen-db'](./_img/create_appoinment.JPG)
 ## Stack
 Technoclogy used:
 <div align="center">
@@ -61,8 +70,11 @@ Technoclogy used:
 <a href="https://developer.mozilla.org/es/docs/Web/JavaScript">
     <img src= "https://img.shields.io/badge/javascipt-EFD81D?style=for-the-badge&logo=javascript&logoColor=black"/>
 </a>
- </div>
+<a href="https://www.mysql.com/">
+    <img src= "https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"/>
+</a>
 
+ </div>
 
 
 
@@ -75,7 +87,41 @@ Technoclogy used:
 6. ``` $ npm run dev ``` 
 7. ...
 
+## Endpoints
+<details>
+<summary>Endpoints</summary>
 
+- AUTH
+    - REGISTER
+
+            POST http://localhost:3000/auth/register
+        body:
+        ``` js
+            {
+                "user": "David",
+                "email": "david@david.com",
+                "password": "princes"
+            }
+        ```
+
+    - LOGIN
+
+            POST http://localhost:3000/auth/login  
+        body:
+        ``` js
+            {
+                "user": "David",
+                "email": "david@david.com",
+                "password": "princes"
+            }
+        ```
+- RUTINAS
+    - RECUPERAR RUTINAS  
+
+            GET http://localhost:3000/api/rutina
+
+    - ...
+</details>
 
 ## License
 This project is under licence from "Antonio Toscano".
@@ -86,6 +132,13 @@ To achieve my goal I have collected information from:
 link to repositories
 link to documentation of external libraries
 
+## Development:
+
+``` js
+ const developer = "datata";
+
+ console.log("Desarrollado por: " Antonio Toscano, Luis Guerrero Roquett);
+```  
 
 
 

@@ -2,6 +2,7 @@ const appointmentController = {};
 const { Appointment } = require('../models');
 
 
+
 appointmentController.createAppointment = async (req, res) => {
     try {
         const { date, hour, id_doctor } = req.body;
@@ -10,7 +11,7 @@ appointmentController.createAppointment = async (req, res) => {
                 date: date,
                 hour: hour,
                 id_doctor: id_doctor,
-                id_patient: req.patientId
+                id_patient: patientId
             }
         )
 
@@ -33,6 +34,7 @@ appointmentController.createAppointment = async (req, res) => {
     }
 }
 
+// Delete appointment
 appointmentController.deleteAppointment = async (req, res) => {
     try {
         const appointmentId = req.params.id;
@@ -57,6 +59,7 @@ appointmentController.deleteAppointment = async (req, res) => {
     }
 }
 
+// Update appointment
 appointmentController.updateAppointment = async (req, res) => {
     try {
         const appointmentId = req.params.id;
@@ -80,8 +83,42 @@ appointmentController.updateAppointment = async (req, res) => {
             }
         );
     }
-}
+};
 
+// Appointment controller for Patient
+
+appointmentController.getAppointment = async (req, res) => {
+    try {
+        const patient = await Patient.findOne({where: {id_user: req.user_id}})
+        const appointment = await Appointment.findAll({where: {id_patients: patient.id}, attributes:{exclude: ["createdAt", "updtedAt"]}},)
+        return sendSuccsessResponse(res, 200, [
+{message: "Your appointment"},
+appointment
+
+        ]);
+
+    } catch (error) {
+        return sendErrorResponse(res, 500, "we couldn't find any appointment", error);
+        
+    }
+};
+
+// Appointment controller for Doctor
+appointmentController.getDoctorAppointment = async (req, res) => {
+    try {
+        const doctor = await Doctor.findOne({where: {id_user: req.user_id}})
+        const appointment = await Appointment.findAll({where: {id_doctors: doctor.id}, attributes:{exclude: ["createdAt", "updtedAt"]}},)
+        return sendSuccsessResponse(res, 200, [
+{message: "Your appointment"},
+appointment
+
+        ]);
+
+    } catch (error) {
+        return sendErrorResponse(res, 500, "we couldn't find any appointment", error);
+        
+    }
+};
 
 
 module.exports = appointmentController;

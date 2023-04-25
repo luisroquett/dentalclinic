@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       role_name:{type: DataTypes.STRING,
       validate:{
-        isAlpha: true,
+        // isAlpha: true,
         
       }} 
     },
