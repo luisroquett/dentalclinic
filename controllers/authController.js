@@ -1,5 +1,5 @@
 const authController = {};
-const { User, Patient } = require("../models");
+const { User, Patient, Doctor } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { generateToken } = require("../_util/token");
@@ -25,10 +25,10 @@ authController.register = async (req, res) => {
       email: email,
       telefono: telefono,
       password: encryptedPassword,
-      role_id: 2,
+      id_roles: 1,
     });
     const newPatient = await Patient.create({
-      user_id: newUser.id,
+      id_users: newUser.id,
     });
     return res.json({
       success: true,
@@ -43,9 +43,9 @@ authController.register = async (req, res) => {
     });
   }
 };
-// register doctor
+// register doctor (admi)
 authController.registerDoctor = async (req, res) => {
-  const { nombre, email, password, apellidos } = req.body;
+  const { nombre, email, password, telefono, apellidos } = req.body;
   if (password.length < 8) {
     return sendErrorResponse(
       res,
@@ -55,15 +55,17 @@ authController.registerDoctor = async (req, res) => {
   }
   const encryptedPassword = hash(password);
   const newUser = {
-    nombre,
-    apellidos,
-    email,
+    nombre: nombre,
+    email: email,
     password: encryptedPassword,
-    id_rol: 2,
+    telefono: telefono,
+    apellidos: apellidos,
+    id_roles: 2,
+    
   };
   try {
-    let newDoctor = await Users.create(newUser);
-     await Doctors.create({ id_usuario: newDoctor.id });
+    let newDoctor = await User.create(newUser);
+     await Doctor.create({ id_users: newDoctor.id });
     sendSuccsessResponse(res, 201, "Doctor registered succsessfully");
   } catch (error) {
     sendErrorResponse(res, 500, "Error creating doctor", error);

@@ -1,15 +1,15 @@
-const { User, Appointment, Patient } = require("../models");
+const { User, Appointment, Patient, Doctor } = require("../models");
 
 const userController = {};
-const { getPagesFromCountLimit, normalizePage } = require("../_util/util");
 const {
   sendSuccsessResponse,
   sendErrorResponse,
 } = require("../_util/sendResponse");
+const { hash } = require("../_util/hash");
 
 userController.getProfile = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.user_id;
     const user = await User.findByPk(userId, {
       attributes: {
         exclude: ["id", "password", "id_roles", "createdAt", "updatedAt"],
@@ -20,20 +20,21 @@ userController.getProfile = async (req, res) => {
     return sendErrorResponse(res, 500, "Error retreiving user data", error);
   }
 };
-
+// Update Profile
 userController.updateProfile = async (req, res) => {
   try {
-    const userId = req.userId;
-    const nombre = req.body.nombre;
-    const apellidos = req.body.apellidos;
-    const email = req.body.email;
-    const telefono = req.body.telefono;
+    const userId = req.user_id;
+    let newPassword;
+    if (req.body.password){
+      newPassword = hash(req.body.password);
+      
+    }
+    
     const updateProfile = await User.update(
       {
-        nombre: nombre,
-        apellidos: apellidos,
-        email: email,
-        telefono: telefono,
+        ...req.body,
+        password: newPassword,
+        id_roles: 1
       },
       { where: { id: userId } }
     );
@@ -70,7 +71,7 @@ userController.getAppointmentsByUser = async (req, res) => {
     });
   }
 };
-
+// Get All Appointments
 userController.getAllAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.findAll();
@@ -87,10 +88,13 @@ userController.getAllAppointments = async (req, res) => {
     });
   }
 };
-
+// Get all Patients
 userController.getAllPatients = async (req, res) => {
   try {
     const patients = await Patient.findAll({
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
       include: {
         model: User,
         attributes: { exclude: ["password", "id_roles"] },
@@ -109,9 +113,10 @@ userController.getAllPatients = async (req, res) => {
     });
   }
 };
+// Get All Doctors
 userController.getAllDoctors = async (req, res) => {
   try {
-    const patients = await Patient.findAll({
+    const patients = await Doctor.findAll({
       include: {
         model: User,
         attributes: { exclude: ["password", "id_roles"] },

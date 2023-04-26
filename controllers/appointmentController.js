@@ -1,20 +1,18 @@
 const appointmentController = {};
-const { Appointment } = require('../models');
-
-
+const { Appointment, User, Patient } = require('../models');
 
 appointmentController.createAppointment = async (req, res) => {
     try {
-        const { date, hour, id_doctor } = req.body;
+        const patient = await Patient.findOne({where:{id_users: req.user_id}})
+        const { date, time, id_doctors } = req.body;
         const newAppointment = await Appointment.create(
             {
                 date: date,
-                hour: hour,
-                id_doctor: id_doctor,
-                id_patient: patientId
+                time: time,
+                id_doctors: id_doctors,
+                id_patients: patient.id
             }
         )
-
         return res.json(
             {
                 success: true,
@@ -23,7 +21,6 @@ appointmentController.createAppointment = async (req, res) => {
             }
         );
     } catch (error) {
-
         return res.status(500).json(
             {
                 success: false,
@@ -33,13 +30,12 @@ appointmentController.createAppointment = async (req, res) => {
         );
     }
 }
-
 // Delete appointment
 appointmentController.deleteAppointment = async (req, res) => {
     try {
+        const patient = await Patient.findOne({where:{id_users: req.user_id}})
         const appointmentId = req.params.id;
-        const deleteAppointment = await Appointment.destroy({ where: { id: appointmentId, id_patient: req.patientId } })
-
+        const deleteAppointment = await Appointment.destroy({ where: { id: appointmentId, id_patients: patient.id } })
         return res.json(
             {
                 success: true,
@@ -55,18 +51,16 @@ appointmentController.deleteAppointment = async (req, res) => {
                 error: error.message
             }
         );
-
     }
 }
-
 // Update appointment
 appointmentController.updateAppointment = async (req, res) => {
     try {
+        const patient = await Patient.findOne({where:{id_users: req.user_id}})
         const appointmentId = req.params.id;
         const date = req.body.date;
-        const hour = req.body.hour;
-        const updateAppointment = await Appointment.update({ date: date, hour: hour, }, { where: { id: appointmentId, id_patient: req.patientId } })
-
+        const time = req.body.time;
+        const updateAppointment = await Appointment.update({ date: date, time: time, }, { where: { id: appointmentId, id_patients: patient.id } })
         return res.json(
             {
                 success: true,
@@ -84,9 +78,7 @@ appointmentController.updateAppointment = async (req, res) => {
         );
     }
 };
-
 // Appointment controller for Patient
-
 appointmentController.getAppointment = async (req, res) => {
     try {
         const patient = await Patient.findOne({where: {id_user: req.user_id}})
@@ -94,15 +86,11 @@ appointmentController.getAppointment = async (req, res) => {
         return sendSuccsessResponse(res, 200, [
 {message: "Your appointment"},
 appointment
-
         ]);
-
     } catch (error) {
         return sendErrorResponse(res, 500, "we couldn't find any appointment", error);
-        
     }
 };
-
 // Appointment controller for Doctor
 appointmentController.getDoctorAppointment = async (req, res) => {
     try {
@@ -111,14 +99,9 @@ appointmentController.getDoctorAppointment = async (req, res) => {
         return sendSuccsessResponse(res, 200, [
 {message: "Your appointment"},
 appointment
-
         ]);
-
     } catch (error) {
         return sendErrorResponse(res, 500, "we couldn't find any appointment", error);
-        
     }
 };
-
-
 module.exports = appointmentController;

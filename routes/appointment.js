@@ -3,25 +3,26 @@ const appointmentController = require("../controllers/appointmentController");
 const router = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
 const isAdmin = require("../middlewares/isAdmin");
+const isPatient = require("../middlewares/isPatient");
 
 /* GET users listing */
 
 // Create appointment
 router.post(
   "/createappointment",
-  verifyToken,
+  verifyToken, isPatient,
   appointmentController.createAppointment
 );
 // Delete appointment
 router.delete(
   "/deleteappointment/:id",
-  verifyToken,
+  verifyToken, isPatient,
   appointmentController.deleteAppointment
 );
 // Modify appointment
 router.put(
   "/updateappointment/:id",
-  verifyToken,
+  verifyToken, isPatient,
   appointmentController.updateAppointment
 );
 // See appointment as Patient
