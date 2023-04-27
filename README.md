@@ -121,7 +121,7 @@ Technoclogy used:
 
          GET http://localhost:3000/users/profile
 
-  - UPDATE USER (USAR TOKEN)
+  - MODIFY USER (USAR TOKEN)
 
           PUT http://localhost:3000/users/profile/update
 
@@ -155,15 +155,15 @@ Technoclogy used:
 
 - CITAS
 
-  - CREAR CITA COMO PACIENTE (USAR TOKEN)
+  - CREATE APPOINTMENT AS PATIENT (USAR TOKEN)
 
         POST http://localhost:3000/appointment/patient
 
-  - BORRAR CITA COMO PACIENTE (USAR TOKEN Y PASAR ID DE CITA)
+  - DELETE APPOINTMENT AS PATIENT (USAR TOKEN Y PASAR ID DE CITA)
 
         DELETE http://localhost:3000/appointment/:id
 
-  - MODIFICAR CITA COMO PACIENTE (USAR TOKEN Y PASAR ID DE CITA)
+  - MODIFY APPOINTMENT AS PATIENT (USAR TOKEN Y PASAR ID DE CITA)
 
         PUT http://localhost:3000/appointment/:id
 
