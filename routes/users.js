@@ -32,11 +32,6 @@ router.get(
   isDoctor,
   userController.getAppointmentsByDoctor
 );
-// router.get(
-//   "/appointments/checkall/doctor",
-//   verifyToken,
-//   isDoctor,
-//   userController.getAllAppointmentsByDoctor
-// );
+
 
 module.exports = router;

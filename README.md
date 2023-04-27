@@ -3,22 +3,20 @@
 <details>
   <summary>Content 📝</summary>
   <ol>
-    <li><a href="#objetivo">Objetivo</a></li>
-    <li><a href="#sobre-el-proyecto">Sobre el proyecto</a></li>
-    <li><a href="#deploy-🚀">Deploy</a></li>
+    <li><a href="#objective">Objective</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#diagrama-bd">Diagrama</a></li>
     <li><a href="#instalación-en-local">Instalación</a></li>
     <li><a href="#endpoints">Endpoints</a></li>
-    <li><a href="#futuras-funcionalidades">Futuras funcionalidades</a></li>
-    <li><a href="#contribuciones">Contribuciones</a></li>
-    <li><a href="#licencia">Licencia</a></li>
-    <li><a href="#webgrafia">Webgrafia</a></li>
-    <li><a href="#desarrollo">Desarrollo</a></li>
-    <li><a href="#agradecimientos">Agradecimientos</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#development">Development</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
+
+## Objective
+The objective in this project requires to create in pairs a functional API connected to a database using sequelize and MySQL of a dental clinic.
 
 ## About
 In order to do so, the customer must be able to register in the application, login & logout and access his customer area, all visually from within the application.
@@ -30,31 +28,10 @@ only he will be able to see himself.
 In addition, dentists must be able to register as professionals,
 login and logout and see all appointments and registered patients.
 
-
-
-## Prerequitis
-Taking into account the requirements, we concluded that this would be
-the minimum number of suitable endpoints:
-User registration.
-User login.
-User logout.
-User profile.
-Modification of profile data.
-Appointment creation.
-Modification of appointments.
-Cancellation of appointments.
-
 ## Diagrama BD
-!['imagen-db'](./_img/db.png)
+!['imagen-db'](./_img/database.png)
 
-Postman
-!['imagen-db'](./_img/postman.jpg)
 
-Creation of User
-!['imagen-db'](./_img/user_register.JPG)
-
-Creation of Appointment
-!['imagen-db'](./_img/create_appoinment.JPG)
 ## Stack
 Technoclogy used:
 <div align="center">
@@ -92,35 +69,102 @@ Technoclogy used:
 <summary>Endpoints</summary>
 
 - AUTH
-    - REGISTER
 
-            POST http://localhost:3000/auth/register
-        body:
-        ``` js
-            {
-                "user": "David",
-                "email": "david@david.com",
-                "password": "princes"
-            }
-        ```
+  - REGISTER USER
 
-    - LOGIN
+          POST http://localhost:3000/auth/register
 
-            POST http://localhost:3000/auth/login  
-        body:
-        ``` js
-            {
-                "user": "David",
-                "email": "david@david.com",
-                "password": "princes"
-            }
-        ```
-- RUTINAS
-    - RECUPERAR RUTINAS  
+    body:
 
-            GET http://localhost:3000/api/rutina
+    ```js
+        {
+            "nombre": "Michael",
+            "apellidos": "Scot",
+            "email": "dunder@dunder.com",
+            "password": "12345678"
+        }
+    ```
+  - REGISTER DOCTOR (ADMIN)
 
-    - ...
+          POST http://localhost:3000/auth/register
+
+    body:
+
+    ```js
+        {
+             "nombre": "Jim",
+             "apellidos": "Halpert",
+             "email": "jimmy@jimmy.com",
+             "password": "12345678"
+        }
+    ```
+
+
+  - LOGIN
+
+          POST http://localhost:3000/auth/login
+
+    body:
+
+    ```js
+        {
+            "email": "jimmy@jimmy.com",
+            "password": "12345678"
+        }
+    ```
+
+- USERS
+
+  - SHOW PATIENT PROFILE (USE TOKEN)
+
+         GET http://localhost:3000/users/profile
+
+  - UPDATE USER (USAR TOKEN)
+
+          PUT http://localhost:3000/users/profile/update
+
+    body:
+
+    ```js
+    {
+        "nombre": "Michael",
+        "apellidos": "Scott",
+        "email": "mifflin@mifflin",
+        "telefono": 618560718,
+        "password": "ryan123"
+    }
+    ```
+
+  - CHECK APPOINTMENTS AS A PATIENT (USAR TOKEN)
+
+          GET http://localhost:3000/users/appointments/checkall
+
+  - CHECK APPOINTMENTS AS A DOCTOR (USAR TOKEN)
+
+          GET http://localhost:3000/users/appointments/checkall/doctor
+
+  - SHOW ALL PATIENTS AS ADMIN (USAR TOKEN)
+
+          GET http://localhost:3000/users/profile/checkallpatients
+
+  - SHOW ALL DOCTOR AS ADMIN (USAR TOKEN)
+
+          GET http://localhost:3000/users/profile/checkalldoctors
+
+- CITAS
+
+  - CREAR CITA COMO PACIENTE (USAR TOKEN)
+
+        POST http://localhost:3000/appointment/patient
+
+  - BORRAR CITA COMO PACIENTE (USAR TOKEN Y PASAR ID DE CITA)
+
+        DELETE http://localhost:3000/appointment/:id
+
+  - MODIFICAR CITA COMO PACIENTE (USAR TOKEN Y PASAR ID DE CITA)
+
+        PUT http://localhost:3000/appointment/:id
+
 </details>
 
 ## License

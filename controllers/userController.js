@@ -52,7 +52,7 @@ userController.updateProfile = async (req, res) => {
     });
   }
 };
-
+// Get Appintments from Patient
 userController.getAppointmentsByPatient = async (req, res) => {
   const { id } = req.params;
   try {
@@ -98,23 +98,7 @@ userController.getAppointmentsByDoctor = async (req, res) => {
 };
 
 
-// Get All Appointments
-userController.getAllAppointments = async (req, res) => {
-  try {
-    const appointments = await Appointment.findAll();
-    return res.json({
-      success: true,
-      message: "Here are all the appointments",
-      data: appointments,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "something went wrong",
-      error: error.message,
-    });
-  }
-};
+
 // Get all Patients
 userController.getAllPatients = async (req, res) => {
   try {
