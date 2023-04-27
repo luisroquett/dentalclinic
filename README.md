@@ -124,7 +124,7 @@ Technoclogy used:
 </details>
 
 ## License
-This project is under licence from "Antonio Toscano".
+This project is under licence from Luis Guerrer.
 
 ## Webgraphy:
 To achieve my goal I have collected information from:

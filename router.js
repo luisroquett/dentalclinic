@@ -9,7 +9,7 @@ router.use("/", indexRouter);
 /* authentication */
 router.use("/auth", authRouter);
 /* users */
-router.use("/users", userRouter)
+router.use("/users", userRouter);
 /* appointment */
- router.use("/appointments", appointmentRouter)
+router.use("/appointments", appointmentRouter);
 module.exports = router;

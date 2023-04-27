@@ -1,11 +1,11 @@
 const { User, Appointment, Patient, Doctor } = require("../models");
 
-const userController = {};
 const {
   sendSuccsessResponse,
   sendErrorResponse,
 } = require("../_util/sendResponse");
 const { hash } = require("../_util/hash");
+const userController = {};
 
 userController.getProfile = async (req, res) => {
   try {
@@ -20,21 +20,21 @@ userController.getProfile = async (req, res) => {
     return sendErrorResponse(res, 500, "Error retreiving user data", error);
   }
 };
+
 // Update Profile
 userController.updateProfile = async (req, res) => {
   try {
     const userId = req.user_id;
     let newPassword;
-    if (req.body.password){
+    if (req.body.password) {
       newPassword = hash(req.body.password);
-      
     }
-    
+
     const updateProfile = await User.update(
       {
         ...req.body,
         password: newPassword,
-        id_roles: 1
+        id_roles: 1,
       },
       { where: { id: userId } }
     );
@@ -53,11 +53,13 @@ userController.updateProfile = async (req, res) => {
   }
 };
 
-userController.getAppointmentsByUser = async (req, res) => {
+userController.getAppointmentsByPatient = async (req, res) => {
+  const { id } = req.params;
   try {
     const appointments = await Appointment.findAll({
-      where: { id_patient: req.patientId },
+      where: { id_patients: id },
     });
+    console.log(appointments);
     return res.json({
       success: true,
       message: "Here are your appointments",
@@ -71,6 +73,31 @@ userController.getAppointmentsByUser = async (req, res) => {
     });
   }
 };
+
+
+// Get All Appoiments from Doctors
+userController.getAppointmentsByDoctor = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const appointments = await Appointment.findAll({
+      where: { id_doctors: id },
+    });
+    console.log(appointments);
+    return res.json({
+      success: true,
+      message: "Here are your appointments",
+      data: appointments,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "something went wrong",
+      error: error.message,
+    });
+  }
+};
+
+
 // Get All Appointments
 userController.getAllAppointments = async (req, res) => {
   try {

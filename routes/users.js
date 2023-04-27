@@ -15,17 +15,23 @@ router.get(
   userController.getAllPatients
 );
 router.get(
-    "/profile/checkalldoctors",
-    verifyToken,
-    isAdmin,
-    userController.getAllDoctors
-  );
-// router.get(
-//   "/appointments/checkall",
-//   verifyToken,
-//   isPatient,
-//   userController.getAppointmentsByPatient
-// );
+  "/profile/checkalldoctors",
+  verifyToken,
+  isAdmin,
+  userController.getAllDoctors
+);
+router.get(
+  "/appointments/checkall/:id",
+  verifyToken,
+  isPatient,
+  userController.getAppointmentsByPatient
+);
+router.get(
+  "/appointments/checkalldoctors/:id",
+  verifyToken,
+  isDoctor,
+  userController.getAppointmentsByDoctor
+);
 // router.get(
 //   "/appointments/checkall/doctor",
 //   verifyToken,
