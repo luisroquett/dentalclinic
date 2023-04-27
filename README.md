@@ -93,12 +93,13 @@ Technoclogy used:
 
     ```js
         {
-             "nombre": "Jim",
-             "apellidos": "Halpert",
-             "email": "jimmy@jimmy.com",
-             "telefono": "686543789",
-             "password": "12345678"
-        }
+         "nombre": "Michael",
+         "apellidos": "Scott",
+         "email": "mifflin@mifflin.com",
+         "telefono": "68747444",
+         "password": "ryan1234"
+         
+    }
     ```
 
 
@@ -132,7 +133,7 @@ Technoclogy used:
         "nombre": "Michael",
         "apellidos": "Scott",
         "email": "mifflin@mifflin",
-        "telefono": 618560718,
+        "telefono": "618560718",
         "password": "ryan123"
     }
     ```
