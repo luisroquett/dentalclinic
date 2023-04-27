@@ -7,7 +7,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#diagrama-bd">Diagrama</a></li>
-    <li><a href="#instalación-en-local">Instalación</a></li>
+    <li><a href="#instalation-on-local">Instalation on local</a></li>
     <li><a href="#endpoints">Endpoints</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#development">Development</a></li>
@@ -81,6 +81,7 @@ Technoclogy used:
             "nombre": "Michael",
             "apellidos": "Scot",
             "email": "dunder@dunder.com",
+            "telefono": "686543765",
             "password": "12345678"
         }
     ```
@@ -95,6 +96,7 @@ Technoclogy used:
              "nombre": "Jim",
              "apellidos": "Halpert",
              "email": "jimmy@jimmy.com",
+             "telefono": "686543789",
              "password": "12345678"
         }
     ```
