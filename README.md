@@ -154,19 +154,19 @@ Technoclogy used:
 
           GET http://localhost:3000/users/profile/checkalldoctors
 
-- CITAS
+- APPOINTMENTS
 
   - CREATE APPOINTMENT AS PATIENT (USAR TOKEN)
 
-        POST http://localhost:3000/appointment/patient
+        POST http://localhost:3000/appointments/createappointment
 
   - DELETE APPOINTMENT AS PATIENT (USAR TOKEN Y PASAR ID DE CITA)
 
-        DELETE http://localhost:3000/appointment/:id
+        DELETE http://localhost:3000/appointments/deleteappointment/:id
 
   - MODIFY APPOINTMENT AS PATIENT (USAR TOKEN Y PASAR ID DE CITA)
 
-        PUT http://localhost:3000/appointment/:id
+        PUT http://localhost:3000/appointments/updateappointment/:id
 
 </details>
 
